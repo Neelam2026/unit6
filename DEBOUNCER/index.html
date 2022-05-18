@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            
+            column-gap: 1%;
+            row-gap: 1%;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            width: 85%;
+            margin-left: 5%;
+        }
+        #container>div{
+         width: 90%;
+         height: 300px;
+        }
+        #container>div>img{
+         width: 100%;
+         height: 300px;
+        }
+        input{
+            margin-left: 45%;
+            padding: .5%;
+            width: 30%;
+      margin-top: .9%;
+        }
+        #inputdiv{
+           border: 1px solid rgb(46, 44, 44);
+          height: 60px;
+           background-color: rgb(71, 80, 88);
+           position: fixed;
+           width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="inputdiv">
+        <input placeholder="search movie" id="input" oninput="debounce(main,1000)">
+    </div>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+  
+  
+  const main=async()=>{
+  try{
+    let name=document.getElementById("input").value;
+    let data=await fetch(`https://api.unsplash.com/search/photos?client_id=a-OUEgXO-NmjtpVEgtPPc8a79BE2vjfjCWLCNaCaN54&query=${name}&per_page=20`)
+    let d= await data.json()
+    console.log(d.results)
+    append(d.results)
+  }
+  catch(e){
+      console.log(e)}
+  }
+  //append
+   const  append=(data)=>{
+       data.map((e)=>{
+           let box=document.createElement("div")
+           box.id="box"
+      
+           let img=document.createElement("img")
+           img.src=e.urls.small
+          box.append(img)
+          document.getElementById("container").append(box)
+       })
+   }
+  //debounce
+let timeid;
+  function debounce(main,delay){
+    
+    if( timeid){
+        clearTimeout(timeid)
+    }
+    timeid=setTimeout(function(){
+        main()
+    },delay)
+  }
+
+</script>
