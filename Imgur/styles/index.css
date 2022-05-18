@@ -1,0 +1,45 @@
+#nav{
+    position: fixed;
+    width: 100%;
+    margin-top: -1%;
+    
+}
+
+#top{
+    width: 100%;
+    padding-bottom: 15%;
+    background-image:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS78lgp_7Fh5-V2iYPpU3K-HYcmv_-StkGEbw&usqp=CAU");
+}
+#container{
+    padding-top: 6%;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    column-gap: 2%;
+    row-gap: 2%;
+    width: 80%;
+    margin-left: 10%;
+}
+#img1{
+    height: 280px;
+    width: 100%;
+    padding-top: 4%;
+  }
+  #div1{
+    border: 1px solid grey;
+    padding: 2%;
+    background-color: rgb(105, 102, 102);
+    color: rgb(235, 221, 221);
+    font-size: 130%;
+  }
+  #pagination{
+    background-color: rgb(95, 87, 87);  
+    text-align: right;
+  }
+  #pagination button{
+    background-color: rgb(23, 9, 50);
+    width:15%; 
+    padding: .3%; 
+    color: rgb(233, 226, 223);
+    font-weight: 600;
+   
+  }
