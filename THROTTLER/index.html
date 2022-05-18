@@ -5,6 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+    #container{
+            
+        column-gap: 1%;
+        row-gap: 1%;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        width: 89%;
+        margin-left: 7%;
+    }
+    #container>div{
+     width: 90%;
+     height: 300px;
+    }
+    #container>div>img{
+     width: 100%;
+     height: 300px;
+    }
+    input{
+        margin-left: 40%;
+        padding: .5%;
+        width: 30%;
+  margin-top: .9%;
+    }
+</style>
 </head>
 <body>
     <button id="throttle">Click Me</button>
