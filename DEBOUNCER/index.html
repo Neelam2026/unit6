@@ -12,8 +12,8 @@
             row-gap: 1%;
             display: grid;
             grid-template-columns: repeat(4,1fr);
-            width: 85%;
-            margin-left: 5%;
+            width: 89%;
+            margin-left: 7%;
         }
         #container>div{
          width: 90%;
@@ -24,7 +24,7 @@
          height: 300px;
         }
         input{
-            margin-left: 45%;
+            margin-left: 40%;
             padding: .5%;
             width: 30%;
       margin-top: .9%;
@@ -59,6 +59,20 @@
   catch(e){
       console.log(e)}
   }
+
+  const main2=async()=>{
+  try{
+   
+    let data=await fetch(`https://api.unsplash.com/photos/?client_id=a-OUEgXO-NmjtpVEgtPPc8a79BE2vjfjCWLCNaCaN54&per_page=60`)
+    let d= await data.json()
+    console.log(d)
+    append(d)
+  }
+  catch(e){
+      console.log(e)}
+  }
+  main2()
+ 
   //append
    const  append=(data)=>{
        data.map((e)=>{
@@ -71,6 +85,8 @@
           document.getElementById("container").append(box)
        })
    }
+
+   window.addEventListener('scrollToBottom', append(main2()))
   //debounce
 let timeid;
   function debounce(main,delay){
