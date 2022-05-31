@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+}
+
+.box{
+  border: 1px solid red;
+  margin: 2%;
+  padding: 1%;
+}
