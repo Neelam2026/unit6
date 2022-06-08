@@ -7,12 +7,12 @@ const cors=require("cors")
 app.use(cors())
 app.use(express.json())
 
-
+const datacontroller=require("./controllers/data.controller")
 const userController=require("./controllers/users.controller")
 const brandsController=require("./controllers/brands.controller")
 const productsController=require("./controllers/products.controller")
 const categoryController=require("./controllers/category.controller")
-
+app.use("/data",datacontroller)
 app.use("/users" ,userController)
 app.use("/brands" ,brandsController)
 app.use("/products" ,productsController)

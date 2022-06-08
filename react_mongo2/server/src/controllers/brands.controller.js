@@ -49,5 +49,15 @@ router.delete("/:id",async(req,res)=>{
     }
     
 })
+router.get("/:id",async(req,res)=>{
+    try{
+        const data= await Data.find({userid:req.params.id}).lean().exec();
+        res.status(200).send({data:data})
+    }
+    catch(e){
+        res.status(400).send({error:e})   
+    }
+   
+})
 
 module.exports =  router

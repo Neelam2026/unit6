@@ -1,6 +1,6 @@
 const express = require("express");
 const router=express.Router()
-const Data=require("../models/Products.model")
+const Data=require("../models/data.model")
 
 router.get("/",async(req,res)=>{
     try{
@@ -12,16 +12,7 @@ router.get("/",async(req,res)=>{
     }
    
 })
-router.get("/:id",async(req,res)=>{
-    try{
-        const data= await Data.find({userid:req.params.id}).lean().exec();
-        res.status(200).send({data:data})
-    }
-    catch(e){
-        res.status(400).send({error:e})   
-    }
-   
-})
+
 router.post("/",async(req,res)=>{
     try{
         const data=await Data.create(req.body)
@@ -31,6 +22,17 @@ router.post("/",async(req,res)=>{
         res.status(400).send({error:e}) 
     }
 
+})
+
+router.get("/:id",async(req,res)=>{
+    try{
+        const data= await Data.find({userid:req.params.id}).lean().exec();
+        res.status(200).send({data:data})
+    }
+    catch(e){
+        res.status(400).send({error:e})   
+    }
+   
 })
 
 //patch
