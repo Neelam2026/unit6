@@ -18,7 +18,7 @@ export const Form=()=>{
 
     const handleChange = (e) => {
         setdata({...data,
-       [ e.target.id]:[e.target.value]})
+       [ e.target.id]:e.target.value})
     }
 
       useEffect(()=>{
@@ -38,19 +38,44 @@ export const Form=()=>{
           alert("All fields are required")
         }
         else{
-            
-           await axios.post("http://localhost:8080/data",{data})
-           .then(function (response) {
-            console.log("response",response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+         
+         await fetch("http://localhost:8080/data", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
       
-        
+        getData() 
       }
     }
 
+
+    const Deletedata=async(id)=>{
+    
+      await fetch(`http://localhost:8080/data/${id}`, {
+             method: "DELETE",
+       
+         })
+      
+        getData()   
+    }
+
+    const Updatedata=async(id)=>{
+      console.log(id)
+      await fetch(`http://localhost:8080/data/${id}`, {
+             method: "PATCH",
+             headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ "address": "add2"}),
+      })
+       
+      
+      
+        getData()   
+    }
 
     return (
         <div id="main">
@@ -105,7 +130,7 @@ export const Form=()=>{
         </thead>
         <tbody>
            {table.map((ele,i)=>{
-           return <tr key={ele.id}>
+           return <tr key={ele._id}>
            <td>{ele.firstname}</td>
             <td>{ele.lastname}</td>
             <td>{ele.address}</td>
@@ -116,8 +141,8 @@ export const Form=()=>{
             <td>{ele._id}</td>
             <td>{ele.createdAt}</td>
             <td>{ele.updatedAt}</td>
-            <td style={{"background":"red"}}  >delete</td>
-            <td  style={{"background":"yellowgreen"}}>update</td>
+            <td style={{"background":"red"}} onClick={()=>Deletedata(ele._id)} >delete</td>
+            <td  style={{"background":"yellowgreen"}} onClick={()=>Updatedata(ele._id)}>update</td>
         </tr>
            })}
         </tbody>

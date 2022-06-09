@@ -51,7 +51,7 @@ router.delete("/:id",async(req,res)=>{
 })
 router.get("/:id",async(req,res)=>{
     try{
-        const data= await Data.find({userid:req.params.id}).lean().exec();
+        const data= await Data.findfindById({userid:req.params.id}).lean().exec();
         res.status(200).send({data:data})
     }
     catch(e){
