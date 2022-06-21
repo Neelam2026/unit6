@@ -4,15 +4,17 @@ const jwt = require("jsonwebtoken")
 function  verifyToken(token){
     return new Promise((resolve,reject) => {
         jwt.verify(token, process.env.KEY, (err,decoded) => {
-             if(err)
-             return reject(err)
+             if(err){
+                return reject(err)
+             }
+            
              return resolve(decoded)
         });
     })
 }
 
 const authenticate=async(req,res,next)=>{
-     
+   // console.log(11888111)
     if(!req.headers.authorization ||!req.headers.authorization.startsWith("Bearer "))
     return res.status(400).send({message : "Authorization token not found or incorrect"})
 
@@ -20,15 +22,17 @@ const authenticate=async(req,res,next)=>{
     let decodedUser;
     try{
      decodedUser=await verifyToken(token)
-    
+      console.log(decodedUser)
+      req.userId = decodedUser.user._id;
+      return next();
 
     }
     catch(e){
+     
      return res.status(400).send({message :e.message,message : "Authorization token not found or incorrect"})   
     }
-    console.log(decodedUser)
-    req.userId = decodedUser.user._id;
-    return next();
+    //console.log(decodedUser)
+    
 }
 
 module.exports = authenticate;
